@@ -10,16 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var showLabel: UILabel!
+    @IBOutlet weak var numberTF: UITextField!
+
+    
+
+    @IBAction func buttonAction(_ sender: Any) {
+        if !(numberTF.text?.isEmpty)! {
+            let number = Int(numberTF.text!)
+            showLabel.text = currencyMaker(price: number! as NSNumber)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    func currencyMaker(price: NSNumber) -> String {
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        numberFormatter.groupingSeparator = ","
+        let formattedNumber = numberFormatter.string(from: price)
+        
+        return formattedNumber!
     }
-
-
 }
 
